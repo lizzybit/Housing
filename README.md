@@ -148,7 +148,7 @@ WHERE a.PropertyAddress IS NULL;
 |                 |
 |                 |
 
-### Separare Address into Individual Columns (Address, City, State)
+### Separare PropertyAddress into Individual Columns (Address, City)
  ``` sql
 SELECT PropertyAddress
 FROM housing;
@@ -212,4 +212,60 @@ SET PropertyCitySplit = SUBSTRING(PropertyAddress, LOCATE(',', PropertyAddress) 
 SELECT *
 FROM housing;
  ```
+Drop the old column that is no longer needed:
+ ``` sql
+ALTER TABLE housing
+DROP COLUMN PropertyAddress;
+ ```
+ 
+### Separate OwnerAddress into Individual Columns (Address, City, State)
+``` sql
+SELECT
+OwnerAddress,
+SUBSTRING_INDEX(OwnerAddress, ',', 1) AS Address,
+SUBSTRING_INDEX(SUBSTRING_INDEX(OwnerAddress, ',', 2), ',', -1) AS City,
+SUBSTRING_INDEX(OwnerAddress, ',', -1) AS State
+FROM housing
+LIMIT 10;
+```
+-- Output
+| OwnerAddress                              | Address               | City            | State |
+| ----------------------------------------- | --------------------- | --------------- | ----- |
+| 1808  FOX CHASE DR, GOODLETTSVILLE, TN    | 1808  FOX CHASE DR    |  GOODLETTSVILLE |  TN   |
+| 1832  FOX CHASE DR, GOODLETTSVILLE, TN    | 1832  FOX CHASE DR    |  GOODLETTSVILLE |  TN   |
+| 1864  FOX CHASE DR, GOODLETTSVILLE, TN    | 1864  FOX CHASE DR    |  GOODLETTSVILLE |  TN   |
+| 1853  FOX CHASE DR, GOODLETTSVILLE, TN    | 1853  FOX CHASE DR    |  GOODLETTSVILLE |  TN   |
+| 1829  FOX CHASE DR, GOODLETTSVILLE, TN    | 1829  FOX CHASE DR    |  GOODLETTSVILLE |  TN   |
+| 1821  FOX CHASE DR, GOODLETTSVILLE, TN    | 1821  FOX CHASE DR    |  GOODLETTSVILLE |  TN   |
+| 2005  SADIE LN, GOODLETTSVILLE, TN        | 2005  SADIE LN        |  GOODLETTSVILLE |  TN   |
+| 1917  GRACELAND DR, GOODLETTSVILLE, TN    | 1917  GRACELAND DR    |  GOODLETTSVILLE |  TN   |
+| 1428  SPRINGFIELD HWY, GOODLETTSVILLE, TN | 1428  SPRINGFIELD HWY |  GOODLETTSVILLE |  TN   |
+| 1420  SPRINGFIELD HWY, GOODLETTSVILLE, TN | 1420  SPRINGFIELD HWY |  GOODLETTSVILLE |  TN   |
 
+Update table with new data:
+ ``` sql
+ALTER TABLE housing
+Add OwnerAddressSplit varchar(255);
+
+Update housing
+SET OwnerAddressSplit = SUBSTRING_INDEX(OwnerAddress, ',', 1);
+
+ALTER TABLE housing
+Add OwnerCitySplit varchar(255);
+
+Update housing
+SET OwnerCitySplit = SUBSTRING_INDEX(SUBSTRING_INDEX(OwnerAddress, ',', 2), ',', -1);
+
+ALTER TABLE housing
+Add OwnerStateSplit varchar(255);
+
+Update housing
+SET OwnerStateSplit = SUBSTRING_INDEX(OwnerAddress, ',', -1);
+
+SELECT *
+FROM housing;
+ ```
+Drop the old column that is no longer needed:
+ ``` sql
+ALTER TABLE housing
+DROP COLUMN OwnerAddress;
