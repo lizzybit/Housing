@@ -6,3 +6,9 @@ SELECT REPLACE(SaleDate,',','') AS SaleDate
 FROM housing;
 
 SELECT STR_TO_DATE('May 1 2013','%M %d %Y');
+
+
+
+
+
+
