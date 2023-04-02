@@ -261,14 +261,14 @@ Drop the old column that is no longer needed:
  ``` sql
 ALTER TABLE housing
 DROP COLUMN OwnerAddress;
-
+```
 ### Change Y to Yes and N to No in 'Sold as Vacant' Field
 ``` sql
-SELECT DISTINCT SoldAsVacant , COUNT(SoldAsVacant)
+SELECT DISTINCT SoldAsVacant, COUNT(SoldAsVacant)
 From housing
 Group by 1
 order by 2;
- ```
+```
 -- Output
 | SoldAsVacant | Count(SoldAsVacant) |
 | ------------ | ------------------- |
