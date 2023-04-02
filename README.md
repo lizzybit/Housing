@@ -157,15 +157,44 @@ Extract data up to and not including the comma in the PropertyAddress column:
  ``` sql
 SELECT
 SUBSTRING(PropertyAddress, 1, LOCATE(',', PropertyAddress)-1) AS Address
-FROM housing;
+FROM housing
+LIMIT 10;
  ```
+-- Output
+| Address               |
+| --------------------- |
+| 1808  FOX CHASE DR    |
+| 1832  FOX CHASE DR    |
+| 1864 FOX CHASE  DR    |
+| 1853  FOX CHASE DR    |
+| 1829  FOX CHASE DR    |
+| 1821  FOX CHASE DR    |
+| 2005  SADIE LN        |
+| 1917 GRACELAND  DR    |
+| 1428  SPRINGFIELD HWY |
+| 1420  SPRINGFIELD HWY |
+
 Extract the part of the string after the comma:
  ``` sql
 SELECT 
 SUBSTRING(PropertyAddress, LOCATE(',', PropertyAddress) + 1 , LENGTH(PropertyAddress)) as City
-FROM housing;
+FROM housing
+LIMIT 10;
  ```
- 
+ -- Output
+| City            |
+| --------------- |
+|  GOODLETTSVILLE |
+|  GOODLETTSVILLE |
+|  GOODLETTSVILLE |
+|  GOODLETTSVILLE |
+|  GOODLETTSVILLE |
+|  GOODLETTSVILLE |
+|  GOODLETTSVILLE |
+|  GOODLETTSVILLE |
+|  GOODLETTSVILLE |
+|  GOODLETTSVILLE |
+
 Update table with new data:
  ``` sql
 ALTER TABLE housing
