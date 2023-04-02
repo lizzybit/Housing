@@ -264,13 +264,43 @@ DROP COLUMN OwnerAddress;
 
 ### Change Y to Yes and N to No in 'Sold as Vacant' Field
 ``` sql
-SELECT DISTINCT(SoldAsVacant)
-From housing;
+SELECT DISTINCT SoldAsVacant , COUNT(SoldAsVacant)
+From housing
+Group by 1
+order by 2;
  ```
- -- Output
+-- Output
 | SoldAsVacant | Count(SoldAsVacant) |
 | ------------ | ------------------- |
 | No           | 52                  |
 | N            | 399                 |
 | Yes          | 4623                |
 | Y            | 51403               |
+
+``` sql
+Select SoldAsVacant,
+	CASE WHEN SoldAsVacant = 'Y' THEN 'Yes'
+	     WHEN SoldAsVacant = 'N' THEN 'No'
+	     ELSE SoldAsVacant
+	     END 
+From housing;
+```
+Update table with cleaned data:
+``` sql
+UPDATE housing
+SET SoldAsVacant =
+	CASE WHEN SoldAsVacant = 'Y' THEN 'Yes'
+	     WHEN SoldAsVacant = 'N' THEN 'No'
+	     ELSE SoldAsVacant
+	     END;
+
+SELECT DISTINCT SoldAsVacant , COUNT(SoldAsVacant)
+From housing
+Group by 1
+order by 2;
+```
+ -- Output
+| SoldAsVacant | COUNT(SoldAsVacant) |
+| ------------ | ------------------- |
+| Yes          | 4675                |
+| No           | 51802               |
