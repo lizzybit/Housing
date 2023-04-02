@@ -195,7 +195,15 @@ WHERE row_num = 1
 
 SELECT COUNT(*)
 FROM housing;
+ -------------------------------------------------------------------------------------------------------------------------
+-- Remove Unused Columns
+Select *
+From housing;
 
-		
+ALTER TABLE housing
+DROP COLUMN TaxDistrict, 
+DROP COLUMN LegalReference,
+DROP COLUMN SaleDate;
+
 
 
