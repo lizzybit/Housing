@@ -301,3 +301,43 @@ order by 2;
 | ------------ | ------------------- |
 | Yes          | 4675                |
 | No           | 51802               |
+
+### Remove Dulicates
+Find duplicate rows:
+``` sql
+SELECT * FROM housing
+WHERE UniqueID NOT IN (
+	SELECT UniqueID 
+	FROM (
+		SELECT *, 
+        ROW_NUMBER() OVER (
+		PARTITION BY ParcelID, SalePrice, SaleDate, LegalReference 
+        ORDER BY UniqueID
+      ) AS row_num 
+    FROM housing
+) AS sub
+WHERE row_num = 1
+);
+
+SELECT COUNT(*)
+FROM housing;
+```
+Remove duplicate rows:
+``` sql
+DELETE FROM housing
+WHERE UniqueID NOT IN (
+	SELECT UniqueID 
+	FROM (
+		SELECT *, 
+        ROW_NUMBER() OVER (
+		PARTITION BY ParcelID, SalePrice, SaleDate, LegalReference 
+        ORDER BY UniqueID
+      ) AS row_num 
+    FROM housing
+) AS sub
+WHERE row_num = 1
+);
+
+SELECT COUNT(*)
+FROM housing;
+```
