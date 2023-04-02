@@ -310,11 +310,11 @@ WHERE UniqueID NOT IN (
 	SELECT UniqueID 
 	FROM (
 		SELECT *, 
-        ROW_NUMBER() OVER (
+        	ROW_NUMBER() OVER (
 		PARTITION BY ParcelID, SalePrice, SaleDate, LegalReference 
-        ORDER BY UniqueID
+        	ORDER BY UniqueID
       ) AS row_num 
-    FROM housing
+      FROM housing
 ) AS sub
 WHERE row_num = 1
 );
@@ -329,11 +329,11 @@ WHERE UniqueID NOT IN (
 	SELECT UniqueID 
 	FROM (
 		SELECT *, 
-        ROW_NUMBER() OVER (
+        	ROW_NUMBER() OVER (
 		PARTITION BY ParcelID, SalePrice, SaleDate, LegalReference 
-        ORDER BY UniqueID
+        	ORDER BY UniqueID
       ) AS row_num 
-    FROM housing
+      FROM housing
 ) AS sub
 WHERE row_num = 1
 );
