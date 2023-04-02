@@ -38,3 +38,21 @@ IGNORE 1 ROWS;
 SELECT *
 FROM housing;
  ```
+ 
+ 
+ 
+ 
+ 
+## x. Data Cleaning
+
+### Standardize Date Format
+Change format from mm dd, yyyy to yyyy-mm-dd
+ ``` sql
+UPDATE housing
+SET SaleDate = STR_TO_DATE(SaleDate, '%M %d,%Y');
+ ```
+Change datatype from varchar to date
+ ``` sql
+ALTER TABLE housing
+MODIFY COLUMN SaleDate date;
+ ```
