@@ -305,16 +305,17 @@ order by 2;
 ### Remove Dulicates
 Find duplicate rows:
 ``` sql
-SELECT * FROM housing
+SELECT * 
+FROM housing
 WHERE UniqueID NOT IN (
-	SELECT UniqueID 
-	FROM (
-		SELECT *, 
-        	ROW_NUMBER() OVER (
-		PARTITION BY ParcelID, SalePrice, SaleDate, LegalReference 
-        	ORDER BY UniqueID
-      ) AS row_num 
-      FROM housing
+   SELECT UniqueID 
+   FROM (
+      SELECT *, 
+      ROW_NUMBER() OVER (
+      PARTITION BY ParcelID, SalePrice, SaleDate, LegalReference 
+      ORDER BY UniqueID
+   ) AS row_num 
+   FROM housing
 ) AS sub
 WHERE row_num = 1
 );
@@ -324,20 +325,30 @@ FROM housing;
 ```
 Remove duplicate rows:
 ``` sql
-DELETE FROM housing
+DELETE 
+FROM housing
 WHERE UniqueID NOT IN (
-	SELECT UniqueID 
-	FROM (
-		SELECT *, 
-        	ROW_NUMBER() OVER (
-		PARTITION BY ParcelID, SalePrice, SaleDate, LegalReference 
-        	ORDER BY UniqueID
-      ) AS row_num 
-      FROM housing
+   SELECT UniqueID 
+   FROM (
+      SELECT *, 
+      ROW_NUMBER() OVER (
+      PARTITION BY ParcelID, SalePrice, SaleDate, LegalReference 
+      ORDER BY UniqueID
+   ) AS row_num 
+   FROM housing
 ) AS sub
 WHERE row_num = 1
 );
 
 SELECT COUNT(*)
 FROM housing;
+```
+Select *
+From housing;
+### Remove Unused Columns
+``` sql
+ALTER TABLE housing
+DROP COLUMN TaxDistrict, 
+DROP COLUMN LegalReference,
+DROP COLUMN SaleDate;
 ```
