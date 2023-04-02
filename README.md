@@ -111,6 +111,7 @@ LIMIT 10;
 | NULL            |
 | NULL            |
 | NULL            |
+
 Preform self join:
  ``` sql
 SELECT *
@@ -158,19 +159,6 @@ SUBSTRING(PropertyAddress, 1, LOCATE(',', PropertyAddress)-1) AS Address
 FROM housing
 LIMIT 10;
  ```
--- Output
-| Address               |
-| --------------------- |
-| 1808  FOX CHASE DR    |
-| 1832  FOX CHASE DR    |
-| 1864 FOX CHASE  DR    |
-| 1853  FOX CHASE DR    |
-| 1829  FOX CHASE DR    |
-| 1821  FOX CHASE DR    |
-| 2005  SADIE LN        |
-| 1917 GRACELAND  DR    |
-| 1428  SPRINGFIELD HWY |
-| 1420  SPRINGFIELD HWY |
 
 Extract the part of the string after the comma:
  ``` sql
@@ -179,19 +167,28 @@ SUBSTRING(PropertyAddress, LOCATE(',', PropertyAddress) + 1 , LENGTH(PropertyAdd
 FROM housing
 LIMIT 10;
  ```
+ Combine:
+ ``` sql
+SELECT
+PropertyAddress,
+SUBSTRING(PropertyAddress, 1, LOCATE(',', PropertyAddress)-1) AS Address,
+SUBSTRING(PropertyAddress, LOCATE(',', PropertyAddress) + 1 , LENGTH(PropertyAddress)) as City
+FROM housing
+LIMIT 10;
+ ```
  -- Output
-| City            |
-| --------------- |
-|  GOODLETTSVILLE |
-|  GOODLETTSVILLE |
-|  GOODLETTSVILLE |
-|  GOODLETTSVILLE |
-|  GOODLETTSVILLE |
-|  GOODLETTSVILLE |
-|  GOODLETTSVILLE |
-|  GOODLETTSVILLE |
-|  GOODLETTSVILLE |
-|  GOODLETTSVILLE |
+| PropertyAddress                       | Address               | City            |
+| ------------------------------------- | --------------------- | --------------- |
+| 1808  FOX CHASE DR, GOODLETTSVILLE    | 1808  FOX CHASE DR    |  GOODLETTSVILLE |
+| 1832  FOX CHASE DR, GOODLETTSVILLE    | 1832  FOX CHASE DR    |  GOODLETTSVILLE |
+| 1864 FOX CHASE  DR, GOODLETTSVILLE    | 1864 FOX CHASE  DR    |  GOODLETTSVILLE |
+| 1853  FOX CHASE DR, GOODLETTSVILLE    | 1853  FOX CHASE DR    |  GOODLETTSVILLE |
+| 1829  FOX CHASE DR, GOODLETTSVILLE    | 1829  FOX CHASE DR    |  GOODLETTSVILLE |
+| 1821  FOX CHASE DR, GOODLETTSVILLE    | 1821  FOX CHASE DR    |  GOODLETTSVILLE |
+| 2005  SADIE LN, GOODLETTSVILLE        | 2005  SADIE LN        |  GOODLETTSVILLE |
+| 1917 GRACELAND  DR, GOODLETTSVILLE    | 1917 GRACELAND  DR    |  GOODLETTSVILLE |
+| 1428  SPRINGFIELD HWY, GOODLETTSVILLE | 1428  SPRINGFIELD HWY |  GOODLETTSVILLE |
+| 1420  SPRINGFIELD HWY, GOODLETTSVILLE | 1420  SPRINGFIELD HWY |  GOODLETTSVILLE |
 
 Update table with new data:
  ``` sql
@@ -278,12 +275,12 @@ order by 2;
 | Y            | 51403               |
 
 ``` sql
-Select SoldAsVacant,
+SELECT SoldAsVacant,
 	CASE WHEN SoldAsVacant = 'Y' THEN 'Yes'
 	     WHEN SoldAsVacant = 'N' THEN 'No'
 	     ELSE SoldAsVacant
 	     END 
-From housing;
+FROM housing;
 ```
 Update table with cleaned data:
 ``` sql
