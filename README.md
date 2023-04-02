@@ -56,3 +56,33 @@ Change datatype from varchar to date
 ALTER TABLE housing
 MODIFY COLUMN SaleDate date;
  ```
+ ### Populate Property Address Data
+ ``` sql
+SELECT PropertyAddress
+FROM housing
+WHERE PropertyAddress IS NULL;
+ ```
+Preform self join
+ ``` sql
+SELECT *
+FROM housing a
+JOIN housing b
+ON a.ParcelId = b.ParcelId AND a.UniqueId <> b.UniqueId;
+ ```
+Update the PropertyAddress column in the housing table with non-NULL values from the same column in another row with the same ParcelId but different UniqueId where PropertyAddress is NULL.
+ ``` sql
+UPDATE housing a
+JOIN housing b
+ON a.ParcelId = b.ParcelId AND a.UniqueId <> b.UniqueId
+SET a.PropertyAddress = IFNULL(a.PropertyAddress,b.PropertyAddress)
+WHERE a.PropertyAddress IS NULL;
+
+SELECT a.ParcelId, a.PropertyAddress, b.ParcelId, b.PropertyAddress, IFNULL(a.PropertyAddress,b.PropertyAddress)
+FROM housing a
+JOIN housing b
+ON a.ParcelId = b.ParcelId AND a.UniqueId <> b.UniqueId
+WHERE a.PropertyAddress IS NULL;
+ ```
+
+ 
+
