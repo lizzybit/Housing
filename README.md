@@ -3,6 +3,8 @@
 
 ## x. Import Data into mySQL
 Download the raw .xlsx file and convert to .csv
+
+Create new schema and import csv data:
  ``` sql
  CREATE SCHEMA `nashville_housing`;
  
@@ -38,11 +40,7 @@ IGNORE 1 ROWS;
 SELECT *
 FROM housing;
  ```
- 
- 
- 
- 
- 
+
 ## x. Data Cleaning
 
 ### Standardize Date Format
@@ -65,12 +63,12 @@ LIMIT 10;
 | August 14, 2015    |
 | August 29, 2014    |
 
-Change format from mm dd, yyyy to yyyy-mm-dd
+Change format from mm dd, yyyy to yyyy-mm-dd:
  ``` sql
 UPDATE housing
 SET SaleDate = STR_TO_DATE(SaleDate, '%M %d,%Y');
  ```
-Change datatype from varchar to date
+Change datatype from varchar to date:
  ``` sql
 ALTER TABLE housing
 MODIFY COLUMN SaleDate date;
@@ -208,9 +206,6 @@ Add PropertyCitySplit varchar(255);
 
 Update housing
 SET PropertyCitySplit = SUBSTRING(PropertyAddress, LOCATE(',', PropertyAddress) + 1 , LENGTH(PropertyAddress));
-
-SELECT *
-FROM housing;
  ```
 Drop the old column that is no longer needed:
  ``` sql
@@ -261,11 +256,21 @@ Add OwnerStateSplit varchar(255);
 
 Update housing
 SET OwnerStateSplit = SUBSTRING_INDEX(OwnerAddress, ',', -1);
-
-SELECT *
-FROM housing;
  ```
 Drop the old column that is no longer needed:
  ``` sql
 ALTER TABLE housing
 DROP COLUMN OwnerAddress;
+
+### Change Y to Yes and N to No in 'Sold as Vacant' Field
+``` sql
+SELECT DISTINCT(SoldAsVacant)
+From housing;
+ ```
+ -- Output
+| SoldAsVacant | Count(SoldAsVacant) |
+| ------------ | ------------------- |
+| No           | 52                  |
+| N            | 399                 |
+| Yes          | 4623                |
+| Y            | 51403               |
