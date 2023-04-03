@@ -22,7 +22,7 @@ The dataset consists of one file that contains information on 20,000 real estate
 <p align = "justify"> 
 It is worth noting that the data in this dataset is publicly available, so there may be limitations to its accuracy or completeness. Additionally, as with any dataset, it's important to carefully review and clean the data before using it for analysis to ensure its quality and reliability.</p>
 
-## x. Import Data into mySQL
+## 3. Import Data into mySQL
 Download the raw .xlsx file and convert to .csv
 
 Create new schema and import csv data:
@@ -62,9 +62,9 @@ SELECT *
 FROM housing;
  ```
 
-## x. Data Cleaning
+## 4. Data Cleaning
 
-### Standardize Date Format
+### 4.1 Standardize Date Format
  ```sql
 SELECT SaleDate
 FROM housing
@@ -112,7 +112,7 @@ LIMIT 10;
 | 2015-08-14 |
 | 2014-08-29 |
 
- ### Populate Property Address Data
+### 4.2 Populate Property Address Data
  ``` sql
 SELECT PropertyAddress
 FROM housing
@@ -168,7 +168,7 @@ WHERE a.PropertyAddress IS NULL;
 |                 |
 |                 |
 
-### Separare PropertyAddress into Individual Columns (Address, City)
+### 4.3 Separare PropertyAddress into Individual Columns (Address, City)
  ``` sql
 SELECT PropertyAddress
 FROM housing;
@@ -231,7 +231,7 @@ ALTER TABLE housing
 DROP COLUMN PropertyAddress;
  ```
  
-### Separate OwnerAddress into Individual Columns (Address, City, State)
+### 4.4 Separate OwnerAddress into Individual Columns (Address, City, State)
 ``` sql
 SELECT
 OwnerAddress,
@@ -280,7 +280,7 @@ Drop the old column that is no longer needed:
 ALTER TABLE housing
 DROP COLUMN OwnerAddress;
 ```
-### Change Y to Yes and N to No in 'Sold as Vacant' Field
+### 4.5 Change Y to Yes and N to No in 'Sold as Vacant' Field
 ``` sql
 SELECT DISTINCT SoldAsVacant, COUNT(SoldAsVacant)
 From housing
@@ -323,7 +323,7 @@ order by 2;
 | Yes          | 4675                |
 | No           | 51802               |
 
-### Remove Dulicates
+### 4.7 Remove Dulicates
 Find duplicate rows:
 ``` sql
 SELECT * 
@@ -366,7 +366,7 @@ FROM housing;
 ```
 Select *
 From housing;
-### Remove Unused Columns
+### 4.8 Remove Unused Columns
 ``` sql
 ALTER TABLE housing
 DROP COLUMN TaxDistrict, 
