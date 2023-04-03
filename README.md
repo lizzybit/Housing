@@ -17,8 +17,6 @@
   * [4.8 Remove Unused Columns](#48-remove-unused-columns)
 - [5. Summary/Conclusion](#5-summary-conclusion)
 
-<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
-
 
 ## 1. Background and Motivation
 <p align = "justify"> 
