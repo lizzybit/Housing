@@ -392,3 +392,6 @@ DROP COLUMN SaleDate;
 ```
 
 ## 5. Summary/Conclusion
+In this project, SQL was used to clean and transform a dataset of house sales. The dataset used contained various data quality issues that could impact the accuracy and reliability of the insights derived from the data analysis, making data cleaning a crucial step in the data analysis process. SQL queries were used to transform the dataset into a format suitable for analysis.
+
+The house sales dataset used in this project contained information on various aspects of house sales, such as the sale price, sale date, property address, and more. The dataset was representative of the type of data that organizations collect and analyze to gain insights into their business operations and the data quality issues present in the dataset were common challenges faced by data analysts. The cleaning steps involved the standardization of date format, population of missing data, separation of address fields, change in format, and removal of duplicates and unused columns. The process significantly improved the quality of the data, making it suitable for analysis.
