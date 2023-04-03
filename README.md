@@ -1,4 +1,10 @@
-# Cleaning Housing Data
+<p align = "center">
+ <img src="https://user-images.githubusercontent.com/128324837/229577184-6a0a9129-b989-490e-b11d-04fdd2cfec72.jpg" width=70% height=70%>
+</p>
+
+
+
+# Cleaning Housing Data in SQL
  
 
 ## x. Import Data into mySQL
