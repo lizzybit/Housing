@@ -10,12 +10,12 @@
 - [4. Data Cleaning](#4-data-cleaning)
   * [4.1 Standardize Date Format](#41-standardize-date-format)
   * [4.2 Populate Property Address Data](#42-populate-property-address-data)
-  * [4.3 Separare PropertyAddress into Individual Columns (Address, City)](#43-separare-propertyaddress-into-individual-columns--address--city-)
-  * [4.4 Separate OwnerAddress into Individual Columns (Address, City, State)](#44-separate-owneraddress-into-individual-columns--address--city--state-)
-  * [4.5 Change Y to Yes and N to No in 'Sold as Vacant' Field](#45-change-y-to-yes-and-n-to-no-in--sold-as-vacant--field)
+  * [4.3 Separate PropertyAddress into Individual Columns: Address, City](#43-separate-propertyaddress-into-individual-columns)
+  * [4.4 Separate OwnerAddress into Individual Columns: Address, City, State](#44-separate-owneraddress-into-individual-columns)
+  * [4.5 Change Y to Yes and N to No in SoldAsVacant Field](#45-change-y-to-yes-and-n-to-no-in-soldasvacant-field)
   * [4.7 Remove Dulicates](#47-remove-dulicates)
   * [4.8 Remove Unused Columns](#48-remove-unused-columns)
-- [5. Summary/Conclusion](#5-summary-conclusion)
+- [5. Summary/Conclusion](#5-summaryconclusion)
 
 
 ## 1. Background and Motivation
@@ -181,7 +181,7 @@ WHERE a.PropertyAddress IS NULL;
 |                 |
 |                 |
 
-### 4.3 Separare PropertyAddress into Individual Columns (Address, City)
+### 4.3 Separate PropertyAddress into Individual Columns
 
  ``` sql
 SELECT PropertyAddress
@@ -245,8 +245,7 @@ ALTER TABLE housing
 DROP COLUMN PropertyAddress;
  ```
  
-### 4.4 Separate OwnerAddress into Individual Columns (Address, City, State)
-
+### 4.4 Separate OwnerAddress into Individual Columns
 ``` sql
 SELECT
 OwnerAddress,
@@ -295,7 +294,7 @@ Drop the old column that is no longer needed:
 ALTER TABLE housing
 DROP COLUMN OwnerAddress;
 ```
-### 4.5 Change Y to Yes and N to No in 'Sold as Vacant' Field
+### 4.5 Change Y to Yes and N to No in SoldAsVacant Field
 
 ``` sql
 SELECT DISTINCT SoldAsVacant, COUNT(SoldAsVacant)
@@ -391,7 +390,9 @@ DROP COLUMN LegalReference,
 DROP COLUMN SaleDate;
 ```
 
-## 5. Summary/Conclusion
-In this project, SQL was used to clean and transform a dataset of house sales. The dataset used contained various data quality issues that could impact the accuracy and reliability of the insights derived from the data analysis, making data cleaning a crucial step in the data analysis process. SQL queries were used to transform the dataset into a format suitable for analysis.
 
-The house sales dataset used in this project contained information on various aspects of house sales, such as the sale price, sale date, property address, and more. The dataset was representative of the type of data that organizations collect and analyze to gain insights into their business operations and the data quality issues present in the dataset were common challenges faced by data analysts. The cleaning steps involved the standardization of date format, population of missing data, separation of address fields, change in format, and removal of duplicates and unused columns. The process significantly improved the quality of the data, making it suitable for analysis.
+## 5. Summary/Conclusion
+<p align = "justify"> 
+In this project, SQL was used to clean and transform a dataset of house sales. The dataset used contained various data quality issues that could impact the accuracy and reliability of the insights derived from the data analysis, making data cleaning a crucial step in the data analysis process. SQL queries were used to transform the dataset into a format suitable for analysis.</p>
+<p align = "justify"> 
+The house sales dataset used in this project contained information on various aspects of house sales, such as the sale price, sale date, property address, and more. The dataset was representative of the type of data that organizations collect and analyze to gain insights into their business operations and the data quality issues present in the dataset were common challenges faced by data analysts. The cleaning steps involved the standardization of date format, population of missing data, separation of address fields, change in format, and removal of duplicates and unused columns. The process significantly improved the quality of the data, making it suitable for analysis.</p>
