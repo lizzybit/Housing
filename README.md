@@ -17,10 +17,10 @@ The house sales dataset used in this project contains information on various asp
 ## 2. Data Retrieval
 
 The dataset used in the project is available at: https://github.com/AlexTheAnalyst/PortfolioProjects/blob/main/Nashville%20Housing%20Data%20for%20Data%20Cleaning.xlsx
-
-It contains race entries from 1950 to present. 
-
-The dataset includes:
+<p align = "justify"> 
+The dataset consists of one file that contains information on 20,000 real estate properties, including their addresses, sale prices, number of bedrooms and bathrooms, square footage, year built and other features. </p>
+<p align = "justify"> 
+It is worth noting that the data in this dataset is publicly available, so there may be limitations to its accuracy or completeness. Additionally, as with any dataset, it's important to carefully review and clean the data before using it for analysis to ensure its quality and reliability.</p>
 
 ## x. Import Data into mySQL
 Download the raw .xlsx file and convert to .csv
