@@ -5,7 +5,14 @@
 
 
 # Cleaning Housing Data in SQL
- 
+
+## 1. Background and Motivation
+<p align = "justify"> 
+Data cleaning is an essential process in preparing data for analysis. SQL is a powerful tool that can be used to achieve this task. In this project, we explore the use of SQL to clean and transform a dataset of house sales. The dataset contains various data quality issues which can impact the accuracy and reliability of the insights derived from the data analysis, making data cleaning a crucial step in the data analysis process.</p>
+<p align = "justify"> 
+Through the use of SQL queries, we aim to transform the dataset into a format that is suitable for analysis. We will explore various SQL techniques to correct date formats, populate missing data, remove duplicates, and fix other data quality issues. Our focus is on the use of SQL as a data cleaning tool, with the goal of improving the quality of the data and ensuring that it is fit for analysis.</p>
+<p align = "justify"> 
+The house sales dataset used in this project contains information on various aspects of house sales, such as the sale price, sale date, property address, and more. The dataset is representative of the type of data that organizations collect and analyze to gain insights into their business operations, and the data quality issues present in the dataset are common challenges faced by data analysts.</p>
 
 ## x. Import Data into mySQL
 Download the raw .xlsx file and convert to .csv
