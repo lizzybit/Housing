@@ -2,9 +2,23 @@
  <img src="https://user-images.githubusercontent.com/128324837/229577184-6a0a9129-b989-490e-b11d-04fdd2cfec72.jpg" width=70% height=70%>
 </p>
 
-
-
 # Cleaning Housing Data in SQL
+
+- [1. Background and Motivation](#1-background-and-motivation)
+- [2. Data Retrieval](#2-data-retrieval)
+- [3. Import Data into mySQL](#3-import-data-into-mysql)
+- [4. Data Cleaning](#4-data-cleaning)
+  * [4.1 Standardize Date Format](#41-standardize-date-format)
+  * [4.2 Populate Property Address Data](#42-populate-property-address-data)
+  * [4.3 Separare PropertyAddress into Individual Columns (Address, City)](#43-separare-propertyaddress-into-individual-columns--address--city-)
+  * [4.4 Separate OwnerAddress into Individual Columns (Address, City, State)](#44-separate-owneraddress-into-individual-columns--address--city--state-)
+  * [4.5 Change Y to Yes and N to No in 'Sold as Vacant' Field](#45-change-y-to-yes-and-n-to-no-in--sold-as-vacant--field)
+  * [4.7 Remove Dulicates](#47-remove-dulicates)
+  * [4.8 Remove Unused Columns](#48-remove-unused-columns)
+- [5. Summary/Conclusion](#5-summary-conclusion)
+
+<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
+
 
 ## 1. Background and Motivation
 <p align = "justify"> 
@@ -119,7 +133,8 @@ FROM housing
 WHERE PropertyAddress IS NULL
 LIMIT 10;
  ```
-#### Output
+-- Output
+
 | PropertyAddress |
 | --------------- |
 | NULL            |
@@ -169,6 +184,7 @@ WHERE a.PropertyAddress IS NULL;
 |                 |
 
 ### 4.3 Separare PropertyAddress into Individual Columns (Address, City)
+
  ``` sql
 SELECT PropertyAddress
 FROM housing;
@@ -232,6 +248,7 @@ DROP COLUMN PropertyAddress;
  ```
  
 ### 4.4 Separate OwnerAddress into Individual Columns (Address, City, State)
+
 ``` sql
 SELECT
 OwnerAddress,
@@ -281,6 +298,7 @@ ALTER TABLE housing
 DROP COLUMN OwnerAddress;
 ```
 ### 4.5 Change Y to Yes and N to No in 'Sold as Vacant' Field
+
 ``` sql
 SELECT DISTINCT SoldAsVacant, COUNT(SoldAsVacant)
 From housing
@@ -324,6 +342,7 @@ order by 2;
 | No           | 51802               |
 
 ### 4.7 Remove Dulicates
+
 Find duplicate rows:
 ``` sql
 SELECT * 
@@ -364,12 +383,14 @@ WHERE row_num = 1
 SELECT COUNT(*)
 FROM housing;
 ```
-Select *
-From housing;
+
 ### 4.8 Remove Unused Columns
+
 ``` sql
 ALTER TABLE housing
 DROP COLUMN TaxDistrict, 
 DROP COLUMN LegalReference,
 DROP COLUMN SaleDate;
 ```
+
+## 5. Summary/Conclusion
