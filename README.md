@@ -14,6 +14,14 @@ Through the use of SQL queries, we aim to transform the dataset into a format th
 <p align = "justify"> 
 The house sales dataset used in this project contains information on various aspects of house sales, such as the sale price, sale date, property address, and more. The dataset is representative of the type of data that organizations collect and analyze to gain insights into their business operations, and the data quality issues present in the dataset are common challenges faced by data analysts.</p>
 
+## 2. Data Retrieval
+
+The dataset used in the project is available at: https://github.com/AlexTheAnalyst/PortfolioProjects/blob/main/Nashville%20Housing%20Data%20for%20Data%20Cleaning.xlsx
+
+It contains race entries from 1950 to present. 
+
+The dataset includes:
+
 ## x. Import Data into mySQL
 Download the raw .xlsx file and convert to .csv
 
