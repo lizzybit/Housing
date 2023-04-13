@@ -4,6 +4,7 @@
 
 # Cleaning Housing Data in SQL
 
+## Table of Contents
 - [1. Background and Motivation](#1-background-and-motivation)
 - [2. Data Retrieval](#2-data-retrieval)
 - [3. Import Data into mySQL](#3-import-data-into-mysql)
